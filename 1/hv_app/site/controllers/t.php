@@ -32,5 +32,32 @@ class T extends CI_Controller {
 
 		echo $this->email->print_debugger();
     }
+
+    public function medoo(){
+        $this->load->library('medoo');
+        $this->load->config('medoom',TRUE);
+        $medoo_m = new medoo();
+        $medoo_conf=$this->config->item('medoom');
+        $medoo_m->config($medoo_conf);
+        //print_r($medoo_conf);
+        $r=$medoo_m->select('ph_user','username',array('userid'=>'100000'));
+        header('Content-Type:text/html;charset=utf8');
+        print_r($r);
+        
+    }
+
+    public function cap(){
+        $this->load->library('simplecaptcha');
+
+        $captcha = new SimpleCaptcha();
+        //$captcha->wordsFile =  'words/en.dic';
+        $captcha->session_var = 'secretword';
+        $captcha->imageFormat = 'png';
+        $captcha->lineWidth = 3;
+        $captcha->scale = 3; $captcha->blur = true;
+        $captcha->resourcesPath = "./assets/resources";
+        //echo $captcha->resourcesPath.$captcha->wordsFile;
+        $captcha->CreateImage();
+    }
 }
         
