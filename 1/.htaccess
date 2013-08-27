@@ -1,8 +1,0 @@
-<IfModule mod_rewrite.c>  
-<Files ~ "^.(htaccess|htpasswd)$">  
-deny from all  
-</Files>  
-
-RewriteEngine on  
-RewriteCond $1 !^(index\.php|assets|robots\.txt|webservice\.php)  
-RewriteRule ^(.*)$ /pharos/index.php/$1 [L]
